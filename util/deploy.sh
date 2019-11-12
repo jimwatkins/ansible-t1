@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp -r ../inv/* /etc/ansible
+cp -rv ../inv/* /etc/ansible
