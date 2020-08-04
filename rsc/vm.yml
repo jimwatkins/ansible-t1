@@ -1,3 +1,17 @@
+vars:
+- hosts: localhost
+  gather_facts: no
+  vars:
+    vcenter_hostname: "vcenter.montana.local"
+    vcenter_username: "administrator@vsphere.local"
+    vcenter_password: "Am@nda00"
+    datacenter_name: "MontanaDC"
+    cluster_name: "PrimaryCluster"
+    vm_name: "NewVM"
+    template_name: "Ubuntu 20.04 LTS"
+    virtual_machine_datastore: "fast-iscsi"
+  tasks:
+
 - name: Deploy a virtual machine in a datastore different from the datastore of the template
   vmware_guest:
     hostname: "{{ vcenter_hostname }}"
