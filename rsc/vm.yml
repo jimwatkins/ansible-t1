@@ -1,4 +1,4 @@
-vars:
+---
 - hosts: localhost
   gather_facts: no
   vars:
