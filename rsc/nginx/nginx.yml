@@ -1,11 +1,11 @@
 ---
-- hosts: app
+- hosts: nginx2
   become: true
   tasks:
     - name: Setup nginx conf
       template:
-        src=nginx.conf.tpl
-        dest=/etc/nginx/nginx.conf
+        src=media.conf.tpl
+        dest=/etc/nginx/sites-available/media.conf
       notify: restart nginx
   handlers:
     - name: restart nginx
