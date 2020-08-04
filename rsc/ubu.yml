@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  remote_user: root
+  remote_user: jim
   gather_facts: false
   vars:
     create_user: sammy

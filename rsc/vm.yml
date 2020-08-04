@@ -6,9 +6,10 @@
     vcenter_password: "Am@nda00"
     datacenter_name: "MontanaDC"
     cluster_name: "PrimaryCluster"
-    vm_name: "NewVM"
+    vm_name: "nginx"
     template_name: "Ubuntu 20.04 LTS"
     virtual_machine_datastore: "fast-iscsi"
+    guest_domain: "montana.local"
   tasks:
   - name: "Deploy a virtual machine in a datastore different from the datastore of the template"
     vmware_guest:
@@ -25,7 +26,12 @@
       # Here datastore can be different which holds template
       datastore: "{{ virtual_machine_datastore }}"
       hardware:
-        memory_mb: 512
+        memory_mb: 1024
         num_cpus: 2
+      networks:
+        - name: DPortGroup
+          ip: 192.168.1.2
+          netmask: 255.255.255.0
+      wait_for_ip_address: True
     delegate_to: localhost
     register: deploy   
