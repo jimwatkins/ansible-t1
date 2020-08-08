@@ -21,7 +21,7 @@
       username: "{{ vcenter_username }}"
       password: "{{ vcenter_password }}"
       name: "{{ vm_name }}"
-      state: present
+      state: poweredoff
       template: "{{ template_name }}"
       # Here datastore can be different which holds template
       datastore: "{{ virtual_machine_datastore }}"
@@ -32,6 +32,16 @@
         - name: DPortGroup
           ip: 192.168.1.2
           netmask: 255.255.255.0
-      wait_for_ip_address: True
+          gateway: 192.168.1.1
+          type: static
+          wait_for_ip_address: True
+      customization:
+        hostname: "nginx"
+        domain: "{{ guest_domain }}"
+        dns_servers:
+          - 192.168.1.101
+          - 192.168.1.102
+        dns_suffix:
+          - montana.local
     delegate_to: localhost
     register: deploy   
