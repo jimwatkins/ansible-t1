@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  vars:
+    vcenter_hostname: "vcenter.montana.local"
+    vcenter_username: "administrator@vsphere.local"
+    vcenter_password: "Am@nda00"
+    datacenter_name: "MontanaDC"
+    cluster_name: "PrimaryCluster"
+    vm_name: "backup"
+    template_name: "Ubuntu 20.04 LTS"
+    virtual_machine_datastore: "fast-iscsi"
+    guest_domain: "montana.local"
+  tasks:
+  - name: "Deploy a virtual machine in a datastore different from the datastore of the template"
+    vmware_guest:
+      validate_certs: no
+      folder: /testvms
+      datacenter: MontanaDC
+      cluster: PrimaryCluster
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      name: "{{ vm_name }}" 
+      state: poweredon
+      template: "{{ template_name }}"
+      # Here datastore can be different which holds template
+      datastore: "{{ virtual_machine_datastore }}"
+      hardware:
+        memory_mb: 4096
+        num_cpus: 2
+      networks:
+        - name: DPortGroup
+          ip: 192.168.1.125
+          netmask: 255.255.255.0
+          connected: True
+          start_connected: True
+
+      wait_for_ip_address: True
+    delegate_to: localhost
+    register: deploy   

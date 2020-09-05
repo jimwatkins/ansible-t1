@@ -1,7 +1,18 @@
 ---
-- hosts: nginx2
+# nginx
+
+- name: NGINX provisioing
+  hosts: nginx
+  vars:
+    ansible_user: jim
+    ansible_ssh_pass: amanda
+    ansible_become_pass: amanda
   become: true
   tasks:
+    - name: install the latest version of nginx
+      package:
+        name: nginx
+        state: latest
     - name: Setup nginx conf
       template:
         src=media.conf.tpl

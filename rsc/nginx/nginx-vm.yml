@@ -21,7 +21,7 @@
       username: "{{ vcenter_username }}"
       password: "{{ vcenter_password }}"
       name: "{{ vm_name }}"
-      state: poweredoff
+      state: poweredon
       template: "{{ template_name }}"
       # Here datastore can be different which holds template
       datastore: "{{ virtual_machine_datastore }}"
@@ -35,6 +35,7 @@
           gateway: 192.168.1.1
           type: static
           wait_for_ip_address: True
+          start_connected: yes
       customization:
         hostname: "nginx"
         domain: "{{ guest_domain }}"

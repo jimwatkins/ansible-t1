@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: nginx
   remote_user: jim
   gather_facts: false
   vars:
